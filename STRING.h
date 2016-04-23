@@ -18,10 +18,8 @@ public:
 	STRING* expand(char c);
 	STRING* expand(STRING const &s);
 	STRING* expand(char* s);
-
-	void remove(CHAR c){
-	
-	}
+	STRING* remove(CHAR c);
+	STRING* remove(char c);
 	void input();
 
 };

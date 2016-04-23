@@ -110,7 +110,7 @@ STRING* STRING::expand(STRING const &s)
 		if (i == LENGTH){
 			pStr[i].setContent('\0');
 		}
-		else if (i >= s.length && i < LENGTH){
+		else if (i >= this->length && i < LENGTH){
 			pStr[i].setContent(s.content[i - this->length].getContent());
 		}
 		else{
@@ -141,6 +141,50 @@ STRING* STRING::expand(char* s)
 	delete[] this->content;
 	this->content = pStr;
 	this->length = LENGTH;
+	return this;
+}
+
+STRING* STRING::remove(char c)
+{
+	for (int i = 0; i < this->length; i++){
+		//Move all the characters behind the removed character up to 1 
+		if (this->content[i].getContent() == c)
+		{
+			for (int j = i; j < this->length - 1; j++)
+			{
+				this->content[j] = this->content[j + 1];
+			}
+			this->length = length - 1;
+			this->content[length].setContent('\0');
+		}
+		//Check the character of current remove position before i+1
+		if (this->content[i].getContent() == c)
+		{
+			i--;
+		}
+	}
+	return this;
+}
+
+STRING* STRING::remove(CHAR c)
+{
+	for (int i = 0; i < this->length; i++){
+		if (this->content[i].getContent() == c.getContent())
+		{
+			//Move all the characters behind the removed character up to 1 
+			for (int j = i; j < this->length - 1; j++)
+			{
+				this->content[j] = this->content[j + 1];
+			}
+			this->length = length - 1;
+			this->content[length].setContent('\0');
+		}
+		//Check the character of current remove position before i+1
+		if (this->content[i].getContent() == c.getContent())
+		{
+			i--;
+		}
+	}
 	return this;
 }
 
